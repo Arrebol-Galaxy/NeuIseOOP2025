@@ -1,0 +1,66 @@
+# ---- macOS 系统文件 ----
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 缩略图文件
+._*
+
+# macOS 文件系统自动生成的目录
+.Spotlight-V100
+.Trashes
+.Trash-*
+
+# 网络驱动器生成的文件
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+
+# ---- 编辑器 / IDE 文件 ----
+
+# Xcode
+*.xcuserstate
+*.xcworkspace
+*.xccheckout
+*.xcscmblueprint
+*.pbxuser
+*.mode1v3
+*.mode2v3
+
+# JetBrains (如 IntelliJ, PyCharm, CLion 等)
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+.history/
+
+# ---- 常见日志文件 ----
+*.log
+
+# ---- Python 虚拟环境 ----
+venv/
+__pycache__/
+*.py[cod]
+
+# ---- Node.js ----
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ---- 通用构建产物 ----
+dist/
+build/
+out/
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+*.dll
+*.class
+*.jar
+*.war
+*.ear
