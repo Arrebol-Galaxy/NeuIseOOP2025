@@ -1,0 +1,62 @@
+@startuml
+' --- 设置标题和样式 ---
+title 非多态设计架构(问题一)
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+' --- 定义类 ---
+class Apple {
+  - {static} SUGAR_RATE: double
+  - {static} VITAMIN_RATE: double
+  - weight: double
+  + Apple(weight: double)
+  + getSugar(): double
+  + getVitamins(): double
+  + getWeight(): double
+}
+
+class Pear {
+  - {static} SUGAR_RATE: double
+  - {static} VITAMIN_RATE: double
+  - weight: double
+  + Pear(weight: double)
+  + getSugar(): double
+  + getVitamins(): double
+  + getWeight(): double
+}
+
+class Juice {
+  - apple: Apple
+  - pear: Pear
+  + Juice(apple: Apple, pear: Pear)
+  + getReport(): String
+}
+
+class JuiceMakerGUI {
+  - appleWeightField: JTextField
+  - pearWeightField: JTextField
+  - resultArea: JTextArea
+  - makeJuice(): void
+}
+
+' --- 定义关系 ---
+
+' Juice 与具体的水果类是强耦合的组合关系
+' 它"拥有"一个苹果和一个梨的实例
+Juice *-- "1" Apple : has-a
+Juice *-- "1" Pear : has-a
+
+' GUI类依赖于模型类，因为它需要创建和使用它们
+JuiceMakerGUI ..> Juice : <<creates>>
+JuiceMakerGUI ..> Apple : <<creates>>
+JuiceMakerGUI ..> Pear : <<creates>>
+
+' --- 添加注释说明 ---
+note "高耦合度:\nJuice直接绑定到了\nApple 和 Pear类上." as N1
+(Juice, Apple) . N1
+(Juice, Pear) . N1
+
+note "没有一个统一的超类或者接口.\n拓展性比较差." as N2
+(Apple, Pear) .. N2
+
+@enduml

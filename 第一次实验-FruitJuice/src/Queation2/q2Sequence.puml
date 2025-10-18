@@ -1,0 +1,52 @@
+@startuml
+actor User
+participant "JuiceFactoryGUI" as GUI
+participant "AllStarJuice" as Juice
+participant "Apple" as Apple
+participant "Pear" as Pear
+participant "Orange" as Orange
+
+User -> GUI : 点击 "生产果汁" 按钮
+activate GUI
+
+GUI -> Juice : <<create>> new AllStarJuice(aW, pW, oW)
+activate Juice
+
+Juice -> Apple : <<create>> new Apple(aW)
+Juice -> Pear : <<create>> new Pear(pW)
+Juice -> Orange : <<create>> new Orange(oW)
+note right of Juice
+构造函数内部根据配方创建水果对象
+并添加到内部列表中
+end note
+
+deactivate Juice
+
+GUI -> Juice : getReport()
+activate Juice
+
+note right of Juice
+遍历内部的 fruits 列表
+end note
+
+Juice -> Apple : getSugar()
+Apple --> Juice : 返回苹果糖量
+Juice -> Apple : getVitamins()
+Apple --> Juice : 返回苹果维生素量
+
+Juice -> Pear : getSugar()
+Pear --> Juice : 返回梨糖量
+Juice -> Pear : getVitamins()
+Pear --> Juice : 返回梨维生素量
+
+Juice -> Orange : getSugar()
+Orange --> Juice : 返回桔子糖量
+Juice -> Orange : getVitamins()
+Orange --> Juice : 返回桔子维生素量
+
+Juice --> GUI : 返回最终报告字符串
+deactivate Juice
+
+GUI -> GUI : 更新 JTextArea 显示报告
+deactivate GUI
+@enduml

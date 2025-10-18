@@ -1,0 +1,67 @@
+@startuml
+' 设置方向
+left to right direction
+
+' === 类定义 ===
+abstract class Fruit {
+    # double weight
+    + getWeight(): double
+    + getSugar(): double
+    + getVitamins(): double
+}
+
+class Apple {
+    - SUGAR_RATE: double
+    - VITAMIN_RATE: double
+    + getSugar(): double
+    + getVitamins(): double
+}
+
+class Pear {
+    - SUGAR_RATE: double
+    - VITAMIN_RATE: double
+    + getSugar(): double
+    + getVitamins(): double
+}
+
+class Orange {
+    - SUGAR_RATE: double
+    - VITAMIN_RATE: double
+    + getSugar(): double
+    + getVitamins(): double
+}
+
+abstract class Juice {
+    # List<Fruit> fruits
+    + getReport(): String
+}
+
+class ApplePearJuice {
+    + ApplePearJuice(appleW, pearW)
+}
+
+class AllStarJuice {
+    + AllStarJuice(appleW, pearW, orangeW)
+}
+
+class JuiceFactoryGUI {
+    - juiceRecipeSelector: JComboBox
+    - appleWeightField: JTextField
+    + produceJuice()
+}
+
+' === 关系定义 ===
+Fruit <|-- Apple
+Fruit <|-- Pear
+Fruit <|-- Orange
+
+Juice <|-- ApplePearJuice
+Juice <|-- AllStarJuice
+
+Juice *-- "1..*" Fruit : contains
+
+JuiceFactoryGUI ..> Juice : creates
+JuiceFactoryGUI ..> ApplePearJuice : creates
+JuiceFactoryGUI ..> AllStarJuice : creates
+
+@enduml
